@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="d-flex justify-content-between align-items-center p-3 mb-4 border-bottom">
+    <h1 class="h3 mb-0">Todos</h1>
+    <a href="/logout" class="btn btn-danger">Выйти</a>
+</header>
+
+<div class="container">
+    <a href="/todos/new" class="btn btn-primary mb-3">Добавить задачу</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="todo : ${todos}">
+            <td th:text="${todo.title}">Название</td>
+            <td th:text="${todo.description}">Описание</td>
+            <td th:text="${todo.completed} ? 'Выполнено' : 'Не выполнено'"></td>
+            <td>
+                <a th:href="@{'/todos/' + ${todo.id} + '/edit'}">Редактировать</a> |
+                <a th:href="@{'/todos/' + ${todo.id} + '/delete'}">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
